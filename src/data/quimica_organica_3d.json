@@ -1,0 +1,734 @@
+{
+  "plataforma_info": {
+    "titulo": "Plataforma Didáctica 3D de Química Orgánica y Nomenclatura IUPAC",
+    "version": "1.0",
+    "descripcion": "Estructura de datos para motor 3D, fichas didácticas y sistema de nomenclatura interactivo."
+  },
+  "reglas_nomenclatura": {
+    "prefijos_cadena": [
+      {
+        "carbonos": 1,
+        "prefijo": "met-"
+      },
+      {
+        "carbonos": 2,
+        "prefijo": "et-"
+      },
+      {
+        "carbonos": 3,
+        "prefijo": "prop-"
+      },
+      {
+        "carbonos": 4,
+        "prefijo": "but-"
+      },
+      {
+        "carbonos": 5,
+        "prefijo": "pent-"
+      },
+      {
+        "carbonos": 6,
+        "prefijo": "hex-"
+      },
+      {
+        "carbonos": 7,
+        "prefijo": "hept-"
+      },
+      {
+        "carbonos": 8,
+        "prefijo": "oct-"
+      },
+      {
+        "carbonos": 9,
+        "prefijo": "non-"
+      },
+      {
+        "carbonos": 10,
+        "prefijo": "dec-"
+      },
+      {
+        "carbonos": 11,
+        "prefijo": "undec-"
+      },
+      {
+        "carbonos": 12,
+        "prefijo": "dodec-"
+      },
+      {
+        "carbonos": 13,
+        "prefijo": "tridec-"
+      },
+      {
+        "carbonos": 14,
+        "prefijo": "tetradec-"
+      }
+    ],
+    "jerarquia_grupos_funcionales": [
+      {
+        "prioridad": 1,
+        "grupo": "Ácido carboxílico",
+        "sufijo": "-oico / -ico",
+        "prefijo": "carboxi-",
+        "formula_grupo": "-COOH"
+      },
+      {
+        "prioridad": 2,
+        "grupo": "Éster",
+        "sufijo": "-ato de -ilo",
+        "prefijo": "iloxicarbonil-",
+        "formula_grupo": "-COO-R"
+      },
+      {
+        "prioridad": 3,
+        "grupo": "Amida",
+        "sufijo": "-amida",
+        "prefijo": "carbamoil-",
+        "formula_grupo": "-CONH2"
+      },
+      {
+        "prioridad": 4,
+        "grupo": "Nitrilo",
+        "sufijo": "-nitrilo",
+        "prefijo": "ciano-",
+        "formula_grupo": "-CN"
+      },
+      {
+        "prioridad": 5,
+        "grupo": "Aldehído",
+        "sufijo": "-al",
+        "prefijo": "formil-",
+        "formula_grupo": "-CHO"
+      },
+      {
+        "prioridad": 6,
+        "grupo": "Cetona",
+        "sufijo": "-ona",
+        "prefijo": "oxo-",
+        "formula_grupo": "-CO-"
+      },
+      {
+        "prioridad": 7,
+        "grupo": "Alcohol",
+        "sufijo": "-ol",
+        "prefijo": "hidroxi-",
+        "formula_grupo": "-OH"
+      },
+      {
+        "prioridad": 8,
+        "grupo": "Amina",
+        "sufijo": "-amina",
+        "prefijo": "amino-",
+        "formula_grupo": "-NH2"
+      },
+      {
+        "prioridad": 9,
+        "grupo": "Éter",
+        "sufijo": "éter / -oxi",
+        "prefijo": "oxi-",
+        "formula_grupo": "R-O-R"
+      },
+      {
+        "prioridad": 10,
+        "grupo": "Alqueno",
+        "sufijo": "-eno",
+        "prefijo": "enil-",
+        "formula_grupo": "C=C"
+      },
+      {
+        "prioridad": 11,
+        "grupo": "Alquino",
+        "sufijo": "-ino",
+        "prefijo": "inil-",
+        "formula_grupo": "C≡C"
+      },
+      {
+        "prioridad": 12,
+        "grupo": "Alcano",
+        "sufijo": "-ano",
+        "prefijo": "alquil-",
+        "formula_grupo": "C-C"
+      }
+    ],
+    "pasos_algoritmo_nombrado": [
+      "1. Identificar el grupo funcional principal de mayor jerarquía.",
+      "2. Buscar la cadena principal continua de átomos de carbono que contenga al grupo principal (o mayor cantidad de insaturaciones).",
+      "3. Numera la cadena desde el extremo más cercano al grupo funcional principal.",
+      "4. Identificar y nombrar sustituyentes y ramificaciones en orden alfabético.",
+      "5. Ensamblar el nombre IUPAC: [Prefijos sustituyentes] + [Raíz de C] + [Insaturaciones] + [Sufijo Principal]."
+    ]
+  },
+  "familias_y_grupos": [
+    {
+      "id": "alcanos",
+      "nombre": "Alcanos (Parafinas)",
+      "tipo_hidrocarburo": "Alifático Acíclico Saturado",
+      "formula_general": "CnH2n+2",
+      "hibridacion_carbono": "sp3",
+      "geometria": "Tetraédrica (109.5°)",
+      "descripcion": "Hidrocarburos saturados formados únicamente por enlaces sencillos C-C y C-H."
+    },
+    {
+      "id": "alquenos",
+      "nombre": "Alquenos (Olefinas)",
+      "tipo_hidrocarburo": "Alifático Acíclico Insaturado",
+      "formula_general": "CnH2n",
+      "hibridacion_carbono": "sp2",
+      "geometria": "Triangular Plana (120°)",
+      "descripcion": "Contienen al menos un doble enlace carbono-carbono (C=C). Muestran isomería geométrica cis/trans."
+    },
+    {
+      "id": "alquinos",
+      "nombre": "Alquinos (Acetilénicos)",
+      "tipo_hidrocarburo": "Alifático Acíclico Insaturado",
+      "formula_general": "CnH2n-2",
+      "hibridacion_carbono": "sp",
+      "geometria": "Lineal (180°)",
+      "descripcion": "Contienen al menos un triple enlace carbono-carbono (C≡C)."
+    },
+    {
+      "id": "cicloalcanos",
+      "nombre": "Cicloalcanos",
+      "tipo_hidrocarburo": "Alifático Cíclico Saturado",
+      "formula_general": "CnH2n",
+      "hibridacion_carbono": "sp3",
+      "geometria": "Cíclica no plana (Silla/Bote en ciclohexano)",
+      "descripcion": "Cadenas cerradas de carbono saturadas."
+    },
+    {
+      "id": "aromaticos",
+      "nombre": "Hidrocarburos Aromáticos (Arenos)",
+      "tipo_hidrocarburo": "Aromático (Anillo bencénico)",
+      "formula_general": "C6H6 (benceno) / Ar-R",
+      "hibridacion_carbono": "sp2 con deslocalización pi",
+      "geometria": "Hexagonal Plana (120°)",
+      "descripcion": "Compuestos con resonancia y alta estabilidad (núcleo de benceno)."
+    },
+    {
+      "id": "alcoholes",
+      "nombre": "Alcoholes",
+      "tipo_hidrocarburo": "Derivado Oxigenado (R-OH)",
+      "formula_general": "CnH2n+1OH",
+      "grupo_funcional": "Hidroxilo (-OH)",
+      "descripcion": "Contienen el grupo hidroxilo unido a un carbono saturado (sp3)."
+    },
+    {
+      "id": "eteres",
+      "nombre": "Éteres",
+      "tipo_hidrocarburo": "Derivado Oxigenado (R-O-R')",
+      "formula_general": "R-O-R'",
+      "grupo_funcional": "Alcoxi (-O-)",
+      "descripcion": "Atomo de oxígeno uniendo dos radicales alquilo o arilo."
+    },
+    {
+      "id": "aldehidos",
+      "nombre": "Aldehídos",
+      "tipo_hidrocarburo": "Derivado Carbonílico (R-CHO)",
+      "formula_general": "R-CHO",
+      "grupo_funcional": "Carbonilo primario (-CHO)",
+      "descripcion": "Grupo carbonilo situado siempre en un carbono terminal."
+    },
+    {
+      "id": "cetonas",
+      "nombre": "Cetonas",
+      "tipo_hidrocarburo": "Derivado Carbonílico (R-CO-R')",
+      "formula_general": "R-CO-R'",
+      "grupo_funcional": "Carbonilo secundario (-CO-)",
+      "descripcion": "Grupo carbonilo situado en un carbono secundario de la cadena."
+    },
+    {
+      "id": "acidos_carboxilicos",
+      "nombre": "Ácidos Carboxílicos",
+      "tipo_hidrocarburo": "Derivado Carboxílico (R-COOH)",
+      "formula_general": "R-COOH",
+      "grupo_funcional": "Carboxilo (-COOH)",
+      "descripcion": "Grupo de mayor prioridad. Posee propiedades ácidas pronunciadas."
+    },
+    {
+      "id": "esteres",
+      "nombre": "Ésteres",
+      "tipo_hidrocarburo": "Derivado de Ácido (R-COO-R')",
+      "formula_general": "R-COO-R'",
+      "grupo_funcional": "Éster / Acilo (-COO-)",
+      "descripcion": "Producto de la reacción entre un ácido carboxílico y un alcohol."
+    },
+    {
+      "id": "aminas",
+      "nombre": "Aminas",
+      "tipo_hidrocarburo": "Derivado Nitrogenado (R-NH2, R2NH, R3N)",
+      "formula_general": "R-NR2",
+      "grupo_funcional": "Amino (-NH2)",
+      "descripcion": "Derivados del amoniaco por sustitución de hidrógenos por grupos alquilo o arilo."
+    },
+    {
+      "id": "amidas",
+      "nombre": "Amidas",
+      "tipo_hidrocarburo": "Derivado Nitrogenado/Carbonílico",
+      "formula_general": "R-CONH2",
+      "grupo_funcional": "Amida (-CONH2)",
+      "descripcion": "Sustitución del -OH de un ácido carboxílico por un grupo amino."
+    },
+    {
+      "id": "nitrilos",
+      "nombre": "Nitrilos",
+      "tipo_hidrocarburo": "Derivado Nitrogenado (R-CN)",
+      "formula_general": "R-CN",
+      "grupo_funcional": "Cianuro (-C≡N)",
+      "descripcion": "Grupo funcional triple enlace carbono-nitrógeno."
+    }
+  ],
+  "base_compuestos": [
+    {
+      "id": "comp_01",
+      "nombre_iupac": "Metano",
+      "nombre_comun": "Gas de los pantanos",
+      "familia_id": "alcanos",
+      "formula_molecular": "CH4",
+      "formula_semidesarrollada": "CH4",
+      "num_carbonos": 1,
+      "nodos_3d": [
+        {
+          "id": "C1",
+          "elemento": "C",
+          "hibridacion": "sp3",
+          "pos_3d_hint": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "H1",
+          "elemento": "H",
+          "pos_3d_hint": [
+            0.63,
+            0.63,
+            0.63
+          ]
+        },
+        {
+          "id": "H2",
+          "elemento": "H",
+          "pos_3d_hint": [
+            -0.63,
+            -0.63,
+            0.63
+          ]
+        },
+        {
+          "id": "H3",
+          "elemento": "H",
+          "pos_3d_hint": [
+            -0.63,
+            0.63,
+            -0.63
+          ]
+        },
+        {
+          "id": "H4",
+          "elemento": "H",
+          "pos_3d_hint": [
+            0.63,
+            -0.63,
+            -0.63
+          ]
+        }
+      ],
+      "enlaces_3d": [
+        {
+          "origen": "C1",
+          "destino": "H1",
+          "orden": 1
+        },
+        {
+          "origen": "C1",
+          "destino": "H2",
+          "orden": 1
+        },
+        {
+          "origen": "C1",
+          "destino": "H3",
+          "orden": 1
+        },
+        {
+          "origen": "C1",
+          "destino": "H4",
+          "orden": 1
+        }
+      ],
+      "ficha_didactica": {
+        "concepto": "El alcano más simple y principal componente del gas natural.",
+        "aplicacion": "Combustible de uso doméstico e industrial.",
+        "geometria": "Tetraédrica perfecta (ángulo 109.5°)."
+      }
+    },
+    {
+      "id": "comp_02",
+      "nombre_iupac": "Etano",
+      "nombre_comun": "Etano",
+      "familia_id": "alcanos",
+      "formula_molecular": "C2H6",
+      "formula_semidesarrollada": "CH3-CH3",
+      "num_carbonos": 2,
+      "nodos_3d": [
+        {
+          "id": "C1",
+          "elemento": "C",
+          "hibridacion": "sp3",
+          "pos_3d_hint": [
+            -0.77,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "C2",
+          "elemento": "C",
+          "hibridacion": "sp3",
+          "pos_3d_hint": [
+            0.77,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "enlaces_3d": [
+        {
+          "origen": "C1",
+          "destino": "C2",
+          "orden": 1
+        }
+      ],
+      "ficha_didactica": {
+        "concepto": "Alcano de dos carbonos con rotación libre alrededor del enlace C-C.",
+        "aplicacion": "Materia prima para la obtención de etileno por craqueo.",
+        "geometria": "Tetraédrica en cada carbono sp3."
+      }
+    },
+    {
+      "id": "comp_03",
+      "nombre_iupac": "2-metilbutano",
+      "nombre_comun": "Isopentano",
+      "familia_id": "alcanos",
+      "formula_molecular": "C5H12",
+      "formula_semidesarrollada": "CH3-CH(CH3)-CH2-CH3",
+      "num_carbonos": 5,
+      "ficha_didactica": {
+        "concepto": "Isómero de cadena ramificado del pentano.",
+        "regla_nombrar": "La cadena principal tiene 4 carbonos (butano) con una ramificación metilo en el C2.",
+        "isomeria": "Isómero de cadena del pentano y del 2,2-dimetilpropano."
+      }
+    },
+    {
+      "id": "comp_04",
+      "nombre_iupac": "Eteno",
+      "nombre_comun": "Etileno",
+      "familia_id": "alquenos",
+      "formula_molecular": "C2H4",
+      "formula_semidesarrollada": "CH2=CH2",
+      "num_carbonos": 2,
+      "nodos_3d": [
+        {
+          "id": "C1",
+          "elemento": "C",
+          "hibridacion": "sp2",
+          "pos_3d_hint": [
+            -0.67,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "C2",
+          "elemento": "C",
+          "hibridacion": "sp2",
+          "pos_3d_hint": [
+            0.67,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "enlaces_3d": [
+        {
+          "origen": "C1",
+          "destino": "C2",
+          "orden": 2
+        }
+      ],
+      "ficha_didactica": {
+        "concepto": "El alqueno más sencillo con un doble enlace covalente.",
+        "geometria": "Plana con ángulos de 120°.",
+        "aplicacion": "Hormona vegetal de maduración de frutos y síntesis de polietileno."
+      }
+    },
+    {
+      "id": "comp_05",
+      "nombre_iupac": "trans-2-penteno",
+      "nombre_comun": "2-trans-penteno",
+      "familia_id": "alquenos",
+      "formula_molecular": "C5H10",
+      "formula_semidesarrollada": "CH3-CH=CH-CH2-CH3",
+      "num_carbonos": 5,
+      "ficha_didactica": {
+        "concepto": "Alqueno interno que exhibe isomería geométrica.",
+        "geometria": "Disposición trans donde los grupos principales están en lados opuestos del plano C=C.",
+        "regla_nombrar": "Se numera desde el C1 más cercano al doble enlace (C2)."
+      }
+    },
+    {
+      "id": "comp_06",
+      "nombre_iupac": "Etino",
+      "nombre_comun": "Acetileno",
+      "familia_id": "alquinos",
+      "formula_molecular": "C2H2",
+      "formula_semidesarrollada": "CH≡CH",
+      "num_carbonos": 2,
+      "nodos_3d": [
+        {
+          "id": "C1",
+          "elemento": "C",
+          "hibridacion": "sp",
+          "pos_3d_hint": [
+            -0.6,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "C2",
+          "elemento": "C",
+          "hibridacion": "sp",
+          "pos_3d_hint": [
+            0.6,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "enlaces_3d": [
+        {
+          "origen": "C1",
+          "destino": "C2",
+          "orden": 3
+        }
+      ],
+      "ficha_didactica": {
+        "concepto": "Alquino más simple con triple enlace (un enlace sigma y dos pi).",
+        "geometria": "Lineal (180°).",
+        "aplicacion": "Soplete oxiacetilénico para soldaduras de alta temperatura."
+      }
+    },
+    {
+      "id": "comp_07",
+      "nombre_iupac": "Ciclobutano",
+      "nombre_comun": "Ciclobutano",
+      "familia_id": "cicloalcanos",
+      "formula_molecular": "C4H8",
+      "formula_semidesarrollada": "(CH2)4",
+      "num_carbonos": 4,
+      "ficha_didactica": {
+        "concepto": "Cicloalcano con alta tensión de anillo por desviación del ángulo tetraédrico.",
+        "isomeria": "Isómero de función del 1-buteno y metilpropeno."
+      }
+    },
+    {
+      "id": "comp_08",
+      "nombre_iupac": "Benceno",
+      "nombre_comun": "Benceno",
+      "familia_id": "aromaticos",
+      "formula_molecular": "C6H6",
+      "formula_semidesarrollada": "C6H6",
+      "num_carbonos": 6,
+      "ficha_didactica": {
+        "concepto": "Anillo aromático plano hexagonal con 6 electrones pi deslocalizados.",
+        "geometria": "Hexagonal plana perfecta (ángulos de 120°).",
+        "propiedad": "Excepcional estabilidad por resonancia."
+      }
+    },
+    {
+      "id": "comp_09",
+      "nombre_iupac": "Etanol",
+      "nombre_comun": "Alcohol etílico",
+      "familia_id": "alcoholes",
+      "formula_molecular": "C2H6O",
+      "formula_semidesarrollada": "CH3-CH2-OH",
+      "num_carbonos": 2,
+      "ficha_didactica": {
+        "concepto": "Alcohol primario soluble en agua debido a puentes de hidrógeno.",
+        "isomeria": "Isómero de función con el dimetiléter (CH3-O-CH3).",
+        "aplicacion": "Desinfectante, solvente y bebidas espirituosas."
+      }
+    },
+    {
+      "id": "comp_10",
+      "nombre_iupac": "2-propanol",
+      "nombre_comun": "Alcohol isopropílico",
+      "familia_id": "alcoholes",
+      "formula_molecular": "C3H8O",
+      "formula_semidesarrollada": "CH3-CHOH-CH3",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "Alcohol secundario con el grupo -OH en el C2.",
+        "isomeria": "Isómero de posición con el 1-propanol (CH3-CH2-CH2OH)."
+      }
+    },
+    {
+      "id": "comp_11",
+      "nombre_iupac": "Etoxietano",
+      "nombre_comun": "Dietil éter",
+      "familia_id": "eteres",
+      "formula_molecular": "C4H10O",
+      "formula_semidesarrollada": "CH3-CH2-O-CH2-CH3",
+      "num_carbonos": 4,
+      "ficha_didactica": {
+        "concepto": "Éter simétrico volátil e inflamable.",
+        "aplicacion": "Históricamente utilizado como anestésico general y solvente orgánico."
+      }
+    },
+    {
+      "id": "comp_12",
+      "nombre_iupac": "Metanal",
+      "nombre_comun": "Formaldehído",
+      "familia_id": "aldehidos",
+      "formula_molecular": "CH2O",
+      "formula_semidesarrollada": "HCHO",
+      "num_carbonos": 1,
+      "ficha_didactica": {
+        "concepto": "Aldehído más simple, sumamente reactivo.",
+        "aplicacion": "Conservante biológico (formol) y resinas poliméricas."
+      }
+    },
+    {
+      "id": "comp_13",
+      "nombre_iupac": "Propanona",
+      "nombre_comun": "Acetona",
+      "familia_id": "cetonas",
+      "formula_molecular": "C3H6O",
+      "formula_semidesarrollada": "CH3-CO-CH3",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "La cetona más sencilla con el grupo carbonilo en el C2.",
+        "isomeria": "Isómero de función con el propanal (CH3-CH2-CHO).",
+        "aplicacion": "Solvente de esmaltes, resinas y quitaesmaltes."
+      }
+    },
+    {
+      "id": "comp_14",
+      "nombre_iupac": "Ácido etanoico",
+      "nombre_comun": "Ácido acético",
+      "familia_id": "acidos_carboxilicos",
+      "formula_molecular": "C2H4O2",
+      "formula_semidesarrollada": "CH3-COOH",
+      "num_carbonos": 2,
+      "ficha_didactica": {
+        "concepto": "Ácido monocarboxílico responsable del olor y sabor agrio del vinagre.",
+        "propiedad": "Forma dímeros por puente de hidrógeno doble."
+      }
+    },
+    {
+      "id": "comp_15",
+      "nombre_iupac": "Ácido 2-hidroxipropanoico",
+      "nombre_comun": "Ácido láctico",
+      "familia_id": "acidos_carboxilicos",
+      "formula_molecular": "C3H6O3",
+      "formula_semidesarrollada": "CH3-CHOH-COOH",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "Compuesto polifuncional con grupo carboxilo y alcohol.",
+        "relevancia": "Ejemplo modelo de la fórmula semidesarrollada más utilizada en química orgánica.",
+        "quiralidad": "Posee un centro quiral en el C2 (isómeros D y L)."
+      }
+    },
+    {
+      "id": "comp_16",
+      "nombre_iupac": "Etanoato de metilo",
+      "nombre_comun": "Acetato de metilo",
+      "familia_id": "esteres",
+      "formula_molecular": "C3H6O2",
+      "formula_semidesarrollada": "CH3-COO-CH3",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "Éster derivado de la esterificación del ácido acético y metanol.",
+        "propiedad": "Aroma frutal característico de los ésteres."
+      }
+    },
+    {
+      "id": "comp_17",
+      "nombre_iupac": "Propanamina",
+      "nombre_comun": "Propilamina",
+      "familia_id": "aminas",
+      "formula_molecular": "C3H9N",
+      "formula_semidesarrollada": "CH3-CH2-CH2-NH2",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "Amina primaria alifática con carácter básico.",
+        "geometria": "Piramidal trigonal en el átomo de nitrógeno."
+      }
+    },
+    {
+      "id": "comp_18",
+      "nombre_iupac": "Propanamida",
+      "nombre_comun": "Propionamida",
+      "familia_id": "amidas",
+      "formula_molecular": "C3H7NO",
+      "formula_semidesarrollada": "CH3-CH2-CONH2",
+      "num_carbonos": 3,
+      "ficha_didactica": {
+        "concepto": "Amida primaria de 3 carbonos derivada del ácido propanoico."
+      }
+    },
+    {
+      "id": "comp_19",
+      "nombre_iupac": "Etanonitrilo",
+      "nombre_comun": "Acetonitrilo",
+      "familia_id": "nitrilos",
+      "formula_molecular": "C2H3N",
+      "formula_semidesarrollada": "CH3-CN",
+      "num_carbonos": 2,
+      "ficha_didactica": {
+        "concepto": "Nitrilo utilizado frecuentemente como solvente polar aprotónico en cromatografía (HPLC)."
+      }
+    }
+  ],
+  "fichas_didacticas_desafios": [
+    {
+      "id": "desafio_01",
+      "titulo": "Isomería de Función C3H6O",
+      "pregunta": "¿Qué dos compuestos con distinto grupo funcional comparten la fórmula C3H6O?",
+      "opciones": [
+        "Propanal y Propanona",
+        "Propanol y Propanona",
+        "Ácido propanoico y Acetona",
+        "Etanol y Metanal"
+      ],
+      "respuesta_correcta": "Propanal y Propanona",
+      "explicacion": "El propanal (aldehído) y la propanona (cetona) poseen exactamente la misma fórmula molecular C3H6O pero distintos grupos funcionales (Isómeros de función)."
+    },
+    {
+      "id": "desafio_02",
+      "titulo": "Prioridad IUPAC Polifuncional",
+      "pregunta": "En el compuesto CH3-CHOH-COOH (ácido láctico), ¿cuál es el grupo de mayor prioridad que le da nombre al compuesto?",
+      "opciones": [
+        "Grupo Alcohol (-OH)",
+        "Grupo Ácido Carboxílico (-COOH)",
+        "Grupo Metilo (-CH3)",
+        "Grupo Éter (-O-)"
+      ],
+      "respuesta_correcta": "Grupo Ácido Carboxílico (-COOH)",
+      "explicacion": "El ácido carboxílico es el grupo de mayor jerarquía en nomenclatura IUPAC, por lo que la molécula se nombra como un ácido (ácido 2-hidroxipropanoico)."
+    },
+    {
+      "id": "desafio_03",
+      "titulo": "Hibridación y Geometría en 3D",
+      "pregunta": "¿Qué hibridación presentan los carbonos unidos por triple enlace en el acetilena (CH≡CH) y qué ángulo de enlace forman?",
+      "opciones": [
+        "sp3 - 109.5°",
+        "sp2 - 120°",
+        "sp - 180°",
+        "sp2 - 90°"
+      ],
+      "respuesta_correcta": "sp - 180°",
+      "explicacion": "Los carbonos con triple enlace tienen hibridación sp y geometría lineal perfecta a 180°."
+    }
+  ]
+}

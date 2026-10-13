@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --color-ink-50: #f8fafc;
+  --color-ink-900: #0b1220;
+  --color-ink-950: #070c17;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased;
+}
+.dark body {
+  @apply bg-[#070c17] text-slate-200;
+}
+
+/* Scrollbars discretos */
+* { scrollbar-width: thin; scrollbar-color: rgb(148 163 184 / 0.5) transparent; }
+
+.card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+}
+.dark .card {
+  @apply border-slate-800 bg-slate-900/70;
+}
+
+.chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 disabled:cursor-not-allowed disabled:opacity-50;
+}
+.btn-primary {
+  @apply bg-teal-600 text-white shadow-sm hover:bg-teal-500 active:scale-[0.98];
+}
+.btn-ghost {
+  @apply border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-200 dark:hover:bg-slate-800;
+}
+
+/* Escenario 3D: siempre oscuro (los átomos blancos de H se ven mejor) */
+.canvas-stage {
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgb(20 184 166 / 0.16), transparent 60%),
+    radial-gradient(800px 500px at 100% 100%, rgb(99 102 241 / 0.20), transparent 60%),
+    linear-gradient(180deg, #111a2e, #0a0f1c);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop 0.18s ease-out; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.animate-shake { animation: shake 0.28s ease-in-out; }
+
+/* Escenario 3D: siempre oscuro para que los átomos blancos (H) se vean en ambos temas */
+.canvas-stage {
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgb(20 184 166 / 0.16), transparent 60%),
+    radial-gradient(800px 500px at 100% 100%, rgb(99 102 241 / 0.20), transparent 60%),
+    linear-gradient(180deg, #0f172a, #0a0f1c);
+}
